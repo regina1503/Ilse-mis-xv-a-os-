@@ -339,7 +339,7 @@
             />
 
             <!-- Formulario Confirmación de Asistencia por Pasos -->
-            <div class="absolute bottom-[18%] sm:bottom-[20%] left-1/2 transform -translate-x-1/2 w-[90%] max-w-xs rounded-2xl p-5 text-white z-20">
+            <div class="absolute bottom-[13%] sm:bottom-[15%] left-1/2 transform -translate-x-1/2 w-[90%] max-w-xs rounded-2xl p-5 text-white z-20">
                 <!-- Banner de Pases Reservados (Ubicado justo arriba de la confirmación) -->
                 <div id="passesNotice" class="text-center text-xs sm:text-sm text-amber-300 font-bold drop-shadow-md tracking-wide mb-3 bg-black/60 py-2.5 px-3 rounded-xl border border-amber-300/50 backdrop-blur-sm"></div>
 
@@ -582,9 +582,21 @@
         let maxAllowedGuests = 1;
 
         function checkUrlParams() {
+            const fullUrl = window.location.href;
             const urlParams = new URLSearchParams(window.location.search);
-            const pasesParam = urlParams.get('pases') || urlParams.get('p');
-            const nombreParam = urlParams.get('nombre') || urlParams.get('n');
+            
+            let pasesParam = urlParams.get('pases') || urlParams.get('p') || urlParams.get('pase');
+            let nombreParam = urlParams.get('nombre') || urlParams.get('n');
+
+            // Fallback por si la URL viene codificada de forma especial en redes/GitHub Pages
+            if (!pasesParam) {
+                const matchPases = fullUrl.match(/[?&#](?:pases|p|pase)=([0-9]+)/i);
+                if (matchPases) pasesParam = matchPases[1];
+            }
+            if (!nombreParam) {
+                const matchNombre = fullUrl.match(/[?&#](?:nombre|n)=([^&#]+)/i);
+                if (matchNombre) nombreParam = decodeURIComponent(matchNombre[1]);
+            }
 
             if (nombreParam) {
                 document.getElementById('guestName').value = nombreParam;
