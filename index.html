@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis xv años Ilse Yuleni❤️</title>
+
+    <!-- Meta Tags para Vista Previa al Compartir (WhatsApp, Facebook, iMessage, etc.) -->
+    <meta name="description" content="Te invito a celebrar mis XV años. Haz clic para ver los detalles de la fiesta y confirmar tu asistencia.">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mis xv años Ilse Yuleni❤️">
+    <meta property="og:description" content="Te invito a celebrar mis XV años. Haz clic para ver los detalles de la fiesta y confirmar tu asistencia.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/portada%20(1).jpg">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/portada%20(1).jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Mis xv años Ilse Yuleni❤️">
+    <meta property="twitter:description" content="Te invito a celebrar mis XV años. Haz clic para ver los detalles de la fiesta y confirmar tu asistencia.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/portada%20(1).jpg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0d0d0d;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Continuous vertical scroll snap container */
+        .page-container {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-section {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        /* Background image scaling - full screen cover to prevent black bars */
+        .bg-full-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.3s ease;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        /* Option to toggle cover vs contain display mode */
+        .mode-contain .bg-full-image {
+            object-fit: contain;
+        }
+
+        /* Floating minimal navigation UI */
+        .floating-nav {
+            position: fixed;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .dot-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dot-indicator.active {
+            background-color: #ffffff;
+            transform: scale(1.35);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Discrete Floating Control Bar */
+        .controls-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #ffffff;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+
+        .controls-bar:hover {
+            opacity: 1;
+        }
+
+        .btn-control {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-control:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hide scrollbars for slick look */
+        .page-container::-webkit-scrollbar {
+            display: none;
+        }
+        .page-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Subtle page transition glow */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Glassmorphic overlays for interactive widgets */
+        .glass-card {
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+    </style>
+</head>
+<body class="mode-cover">
+
+    <!-- Main Scrollable Wrapper -->
+    <div class="page-container" id="pageContainer">
+
+        <!-- PAGINA 1 -->
+        <section class="page-section" id="page-1">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(15).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(15).jpg?raw=true';"
+                alt="Página 1" 
+                class="bg-full-image"
+            />
+        </section>
+
+        <!-- PAGINA 2 -->
+        <section class="page-section" id="page-2">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(1).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(1).jpg?raw=true';"
+                alt="Página 2" 
+                class="bg-full-image"
+            />
+
+            <div class="absolute top-[13%] left-1/2 transform -translate-x-1/2 w-[90%] max-w-md p-4 text-white z-20 flex flex-col gap-3">
+                <audio id="audioPlayer" preload="auto">
+                    <source src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/Drake%20-%20Passionfruit.mp3" type="audio/mpeg">
+                    <source src="https://github.com/regina1503/Ilse-mis-xv-a-os-/raw/main/Drake%20-%20Passionfruit.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el reproductor de audio.
+                </audio>
+                
+                <div class="flex items-center gap-4">
+                    <button id="playPauseBtn" onclick="togglePlayPause()" class="w-12 h-12 rounded-full bg-[#780c15] text-white flex items-center justify-center hover:scale-105 transition-transform shadow-lg focus:outline-none border border-white/20">
+                        <i id="playIcon" class="fa-solid fa-play text-lg translate-x-0.5"></i>
+                    </button>
+                    <div class="flex-1 overflow-hidden drop-shadow-md">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-music text-xs text-[#780c15]"></i>
+                            <h4 class="text-sm font-semibold truncate tracking-wide text-[#780c15]">Passionfruit</h4>
+                        </div>
+                        <p class="text-xs text-[#780c15] truncate">Drake</p>
+                    </div>
+                    <div class="text-xs font-mono text-[#780c15] drop-shadow-md" id="audioTime">0:00</div>
+                </div>
+
+                <!-- Custom Progress Bar -->
+                <div class="w-full bg-white/30 h-1.5 rounded-full overflow-hidden cursor-pointer backdrop-blur-sm" id="progressContainer" onclick="seekAudio(event)">
+                    <div id="progressBar" class="bg-[#780c15] h-full w-0 transition-all duration-100"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGINA 3 -->
+        <section class="page-section" id="page-3">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(6).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(6).jpg?raw=true';"
+                alt="Página 3" 
+                class="bg-full-image"
+            />
+
+            <div class="absolute bottom-[3%] left-1/2 transform -translate-x-1/2 w-[95%] max-w-md p-4 text-white text-center z-20 flex flex-col items-center gap-3 scale-95">
+                <!-- Timer Grid with Transparent Circular Rings -->
+                <div class="grid grid-cols-4 gap-2 sm:gap-4 w-full justify-items-center mt-1">
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-white/80 bg-transparent flex flex-col items-center justify-center transition-transform hover:scale-105">
+                            <span id="cd-days" class="text-xl sm:text-2xl font-bold font-mono drop-shadow-lg text-white leading-none">00</span>
+                        </div>
+                        <span class="text-[10px] sm:text-xs uppercase text-white/90 tracking-wider font-semibold mt-1.5 drop-shadow-lg">Días</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-white/80 bg-transparent flex flex-col items-center justify-center transition-transform hover:scale-105">
+                            <span id="cd-hours" class="text-xl sm:text-2xl font-bold font-mono drop-shadow-lg text-white leading-none">00</span>
+                        </div>
+                        <span class="text-[10px] sm:text-xs uppercase text-white/90 tracking-wider font-semibold mt-1.5 drop-shadow-lg">Horas</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-white/80 bg-transparent flex flex-col items-center justify-center transition-transform hover:scale-105">
+                            <span id="cd-minutes" class="text-xl sm:text-2xl font-bold font-mono drop-shadow-lg text-white leading-none">00</span>
+                        </div>
+                        <span class="text-[10px] sm:text-xs uppercase text-white/90 tracking-wider font-semibold mt-1.5 drop-shadow-lg">Min</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-white/80 bg-transparent flex flex-col items-center justify-center transition-transform hover:scale-105">
+                            <span id="cd-seconds" class="text-xl sm:text-2xl font-bold font-mono drop-shadow-lg text-white leading-none">00</span>
+                        </div>
+                        <span class="text-[10px] sm:text-xs uppercase text-white/90 tracking-wider font-semibold mt-1.5 drop-shadow-lg">Seg</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGINA 4 -->
+        <section class="page-section" id="page-4">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(8).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(8).jpg?raw=true';"
+                alt="Página 4" 
+                class="bg-full-image"
+            />
+        </section>
+
+        <!-- PAGINA 5 -->
+        <section class="page-section" id="page-5">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(4).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(4).jpg?raw=true';"
+                alt="Página 5" 
+                class="bg-full-image"
+            />
+
+            <!-- Botón de Ubicación (A media página) -->
+            <a 
+                href="https://www.google.com/maps/search/?api=1&query=Parroquia+Inmaculado+Coraz%C3%B3n+de+Mar%C3%ADa" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center gap-2.5 px-7 py-2 min-w-[190px] bg-[#780c15] hover:bg-[#5c0910] text-white font-medium text-xs sm:text-sm rounded-full border border-white/30 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 text-center"
+            >
+                <i class="fa-solid fa-location-dot text-white text-xs sm:text-sm"></i>
+                <span class="tracking-wider text-xs uppercase text-white">Ver Ubicación</span>
+            </a>
+
+            <!-- Botón de Ubicación (Al final de la página) -->
+            <a 
+                href="https://maps.google.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="absolute bottom-[1%] left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center gap-2.5 px-7 py-2 min-w-[190px] bg-[#780c15] hover:bg-[#5c0910] text-white font-medium text-xs sm:text-sm rounded-full border border-white/30 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 text-center"
+            >
+                <i class="fa-solid fa-location-dot text-white text-xs sm:text-sm"></i>
+                <span class="tracking-wider text-xs uppercase text-white">Ver Ubicación</span>
+            </a>
+        </section>
+
+        <!-- PAGINA 6 -->
+        <section class="page-section" id="page-6">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(5).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(5).jpg?raw=true';"
+                alt="Página 6" 
+                class="bg-full-image"
+            />
+        </section>
+
+        <!-- PAGINA 7 -->
+        <section class="page-section" id="page-7">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(16).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(16).jpg?raw=true';"
+                alt="Página 7" 
+                class="bg-full-image"
+            />
+
+            <!-- Formulario Confirmación de Asistencia por Pasos -->
+            <div class="absolute bottom-[23%] sm:bottom-[25%] left-1/2 transform -translate-x-1/2 w-[90%] max-w-xs rounded-2xl p-5 text-white z-20">
+                <div class="text-center mb-3">
+                    <!-- Indicador de Pasos -->
+                    <div class="flex justify-center items-center gap-2 mt-2" id="stepIndicators">
+                        <span class="step-dot w-2.5 h-2.5 rounded-full bg-[#780c15] transition-all duration-300"></span>
+                        <span class="step-dot w-2.5 h-2.5 rounded-full bg-white/30 transition-all duration-300"></span>
+                        <span class="step-dot w-2.5 h-2.5 rounded-full bg-white/30 transition-all duration-300"></span>
+                    </div>
+                </div>
+
+                <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)">
+                    <!-- Paso 1: Nombre -->
+                    <div id="step-1" class="step-content space-y-3">
+                        <label class="block text-[11px] font-medium text-white/90 uppercase tracking-wider text-center drop-shadow">Paso 1: Escribe tu Nombre</label>
+                        <input type="text" id="guestName" placeholder="Tu nombre completo" required class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/30 text-white placeholder-white/50 text-xs focus:outline-none focus:border-[#780c15] text-center" />
+                        <button type="button" onclick="goToStep(2)" class="w-full py-2 bg-[#780c15] hover:bg-[#5c0910] text-white font-medium text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                            Siguiente <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+
+                    <!-- Paso 2: Confirmación -->
+                    <div id="step-2" class="step-content hidden space-y-3">
+                        <label class="block text-[11px] font-medium text-white/90 uppercase tracking-wider text-center drop-shadow">Paso 2: ¿Nos acompañarás?</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="selectAttendance(true)" id="btnAttendingYes" class="py-2 px-2 rounded-xl border border-white/40 bg-[#780c15] text-xs text-white font-medium transition-all flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-circle-check text-green-400 text-sm"></i>
+                                <span class="text-[10px]">Sí asistiré</span>
+                            </button>
+                            <button type="button" onclick="selectAttendance(false)" id="btnAttendingNo" class="py-2 px-2 rounded-xl border border-white/30 bg-black/40 text-xs text-white font-medium hover:bg-[#780c15] transition-all flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-circle-xmark text-red-400 text-sm"></i>
+                                <span class="text-[10px]">No podré</span>
+                            </button>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="goToStep(1)" class="w-1/3 py-2 bg-white/10 hover:bg-white/20 text-white text-xs rounded-xl transition-all">Atrás</button>
+                            <button type="button" onclick="goToStep(3)" class="w-2/3 py-2 bg-[#780c15] hover:bg-[#5c0910] text-white font-medium text-xs uppercase tracking-wider rounded-xl transition-all">Siguiente <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3: Número de personas y Enviar por WhatsApp -->
+                    <div id="step-3" class="step-content hidden space-y-3">
+                        <label class="block text-[11px] font-medium text-white/90 uppercase tracking-wider text-center drop-shadow">Paso 3: Número de Personas</label>
+                        <div class="flex items-center justify-center gap-4 py-1">
+                            <button type="button" onclick="changeGuests(-1)" class="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-base hover:bg-[#780c15] transition-all">-</button>
+                            <span id="guestCount" class="text-xl font-bold font-mono text-white px-2 drop-shadow">1</span>
+                            <button type="button" onclick="changeGuests(1)" class="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-base hover:bg-[#780c15] transition-all">+</button>
+                        </div>
+                        <div class="flex gap-2 pt-1">
+                            <button type="button" onclick="goToStep(2)" class="w-1/3 py-2 bg-white/10 hover:bg-white/20 text-white text-xs rounded-xl transition-all">Atrás</button>
+                            <button type="submit" class="w-2/3 py-2 bg-[#780c15] hover:bg-[#5c0910] text-white font-semibold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Enviar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- PAGINA 8 -->
+        <section class="page-section" id="page-8">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(17).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(17).jpg?raw=true';"
+                alt="Página 8" 
+                class="bg-full-image"
+            />
+        </section>
+
+        <!-- PAGINA 9 -->
+        <section class="page-section" id="page-9">
+            <img 
+                src="https://raw.githubusercontent.com/regina1503/Ilse-mis-xv-a-os-/main/ILSE%20(13).jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/regina1503/Ilse-mis-xv-a-os-/blob/main/ILSE%20(13).jpg?raw=true';"
+                alt="Página 9" 
+                class="bg-full-image"
+            />
+        </section>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('pageContainer');
+        const dots = document.querySelectorAll('.dot-indicator');
+        const totalPages = 9;
+        let currentPage = 0;
+        let isCoverMode = false;
+
+        // Scroll listener to update active page indicators
+        container.addEventListener('scroll', () => {
+            const pageHeight = window.innerHeight;
+            const newPage = Math.round(container.scrollTop / pageHeight);
+
+            if (newPage !== currentPage && newPage >= 0 && newPage < totalPages) {
+                currentPage = newPage;
+                updateUI();
+            }
+        });
+
+        // Function to scroll to specific page index
+        function scrollToPage(index) {
+            currentPage = index;
+            container.scrollTo({
+                top: index * window.innerHeight,
+                behavior: 'smooth'
+            });
+            updateUI();
+        }
+
+        // Previous page button
+        function scrollToPrev() {
+            if (currentPage > 0) {
+                scrollToPage(currentPage - 1);
+            }
+        }
+
+        // Next page button
+        function scrollToNext() {
+            if (currentPage < totalPages - 1) {
+                scrollToPage(currentPage + 1);
+            }
+        }
+
+        // Update dot states
+        function updateUI() {
+            dots.forEach((dot, idx) => {
+                if (idx === currentPage) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Keyboard navigation (Up/Down arrow keys & PageUp/PageDown)
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                scrollToNext();
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                scrollToPrev();
+            }
+        });
+
+        // Initialize on load
+        window.onload = function() {
+            updateUI();
+            initAudioPlayer();
+            startCountdown();
+        };
+
+        const audio = document.getElementById('audioPlayer');
+        const playIcon = document.getElementById('playIcon');
+        const progressBar = document.getElementById('progressBar');
+        const audioTime = document.getElementById('audioTime');
+
+        function initAudioPlayer() {
+            if (!audio) return;
+            audio.addEventListener('timeupdate', updateAudioProgress);
+            audio.addEventListener('ended', () => {
+                playIcon.className = 'fa-solid fa-play text-lg translate-x-0.5';
+                progressBar.style.width = '0%';
+            });
+        }
+
+        function togglePlayPause() {
+            if (!audio) return;
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playIcon.className = 'fa-solid fa-pause text-lg';
+                }).catch(err => {
+                    console.log('Audio playback prevented:', err);
+                });
+            } else {
+                audio.pause();
+                playIcon.className = 'fa-solid fa-play text-lg translate-x-0.5';
+            }
+        }
+
+        function updateAudioProgress() {
+            if (!audio || !audio.duration) return;
+            const percentage = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${percentage}%`;
+            
+            const mins = Math.floor(audio.currentTime / 60);
+            const secs = Math.floor(audio.currentTime % 60);
+            audioTime.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function seekAudio(e) {
+            if (!audio || !audio.duration) return;
+            const container = document.getElementById('progressContainer');
+            const rect = container.getBoundingClientRect();
+            const clickPosition = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = clickPosition * audio.duration;
+        }
+
+        function startCountdown() {
+            function getTargetDate() {
+                // Target date set to 13 de Noviembre de 2026, 3:00 PM (15:00 hrs)
+                return new Date(2026, 10, 13, 15, 0, 0);
+            }
+
+            const targetDate = getTargetDate();
+
+            function updateTimer() {
+                const now = new Date();
+                const diff = targetDate - now;
+
+                if (diff <= 0) {
+                    document.getElementById('cd-days').innerText = '00';
+                    document.getElementById('cd-hours').innerText = '00';
+                    document.getElementById('cd-minutes').innerText = '00';
+                    document.getElementById('cd-seconds').innerText = '00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        /* Logic for Step-by-Step RSVP Form */
+        let currentStep = 1;
+        let isAttending = true;
+        let guestCountValue = 1;
+
+        function goToStep(step) {
+            if (step === 2) {
+                const nameInput = document.getElementById('guestName');
+                if (!nameInput.value.trim()) {
+                    nameInput.reportValidity();
+                    return;
+                }
+            }
+
+            currentStep = step;
+            document.querySelectorAll('.step-content').forEach((el, idx) => {
+                if (idx + 1 === step) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+
+            const dots = document.querySelectorAll('#stepIndicators .step-dot');
+            dots.forEach((dot, idx) => {
+                if (idx + 1 <= step) {
+                    dot.classList.remove('bg-white/30');
+                    dot.classList.add('bg-[#780c15]');
+                } else {
+                    dot.classList.remove('bg-[#780c15]');
+                    dot.classList.add('bg-white/30');
+                }
+            });
+        }
+
+        function selectAttendance(attending) {
+            isAttending = attending;
+            const yesBtn = document.getElementById('btnAttendingYes');
+            const noBtn = document.getElementById('btnAttendingNo');
+
+            if (attending) {
+                yesBtn.className = "py-2 px-2 rounded-xl border border-white/40 bg-[#780c15] text-xs text-white font-medium transition-all flex flex-col items-center gap-1";
+                noBtn.className = "py-2 px-2 rounded-xl border border-white/30 bg-black/40 text-xs text-white font-medium hover:bg-[#780c15] transition-all flex flex-col items-center gap-1";
+            } else {
+                noBtn.className = "py-2 px-2 rounded-xl border border-white/40 bg-[#780c15] text-xs text-white font-medium transition-all flex flex-col items-center gap-1";
+                yesBtn.className = "py-2 px-2 rounded-xl border border-white/30 bg-black/40 text-xs text-white font-medium hover:bg-[#780c15] transition-all flex flex-col items-center gap-1";
+            }
+        }
+
+        function changeGuests(delta) {
+            guestCountValue = Math.max(1, Math.min(10, guestCountValue + delta));
+            document.getElementById('guestCount').innerText = guestCountValue;
+        }
+
+        function handleRsvpSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('guestName').value.trim();
+            const attendanceText = isAttending ? "Sí, con gusto asistiré 🎉" : "Lamentablemente no podré asistir 😔";
+            const message = `¡Hola! Confirmo asistencia para los XV años de Ilse:\n\n👤 *Nombre:* ${name}\n✨ *Asistencia:* ${attendanceText}\n👥 *Número de personas:* ${guestCountValue}`;
+            
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=526641941434&text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
