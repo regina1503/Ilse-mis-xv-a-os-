@@ -381,6 +381,7 @@
                     <!-- Paso 3: Número de personas y Enviar por WhatsApp -->
                     <div id="step-3" class="step-content hidden space-y-3">
                         <label class="block text-[11px] font-medium text-white/90 uppercase tracking-wider text-center drop-shadow">Paso 3: Número de Personas</label>
+                        <div id="passesNotice" class="hidden text-center text-xs text-amber-300 font-semibold drop-shadow tracking-wide"></div>
                         <div class="flex items-center justify-center gap-4 py-1">
                             <button type="button" onclick="changeGuests(-1)" class="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-base hover:bg-[#780c15] transition-all">-</button>
                             <span id="guestCount" class="text-xl font-bold font-mono text-white px-2 drop-shadow">1</span>
@@ -488,6 +489,7 @@
             updateUI();
             initAudioPlayer();
             startCountdown();
+            checkUrlParams();
         };
 
         const audio = document.getElementById('audioPlayer');
@@ -575,6 +577,27 @@
         let currentStep = 1;
         let isAttending = true;
         let guestCountValue = 1;
+        let maxAllowedGuests = 10;
+
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pasesParam = urlParams.get('pases') || urlParams.get('p');
+            const nombreParam = urlParams.get('nombre') || urlParams.get('n');
+
+            if (nombreParam) {
+                document.getElementById('guestName').value = nombreParam;
+            }
+
+            if (pasesParam && !isNaN(pasesParam)) {
+                maxAllowedGuests = parseInt(pasesParam, 10);
+                guestCountValue = Math.min(guestCountValue, maxAllowedGuests);
+                const notice = document.getElementById('passesNotice');
+                if (notice) {
+                    notice.innerText = `✨ Tienes ${maxAllowedGuests} pase(s) reservado(s)`;
+                    notice.classList.remove('hidden');
+                }
+            }
+        }
 
         function goToStep(step) {
             if (step === 2) {
@@ -621,7 +644,7 @@
         }
 
         function changeGuests(delta) {
-            guestCountValue = Math.max(1, Math.min(10, guestCountValue + delta));
+            guestCountValue = Math.max(1, Math.min(maxAllowedGuests, guestCountValue + delta));
             document.getElementById('guestCount').innerText = guestCountValue;
         }
 
@@ -629,7 +652,8 @@
             e.preventDefault();
             const name = document.getElementById('guestName').value.trim();
             const attendanceText = isAttending ? "Sí, con gusto asistiré 🎉" : "Lamentablemente no podré asistir 😔";
-            const message = `¡Hola! Confirmo asistencia para los XV años de Ilse:\n\n👤 *Nombre:* ${name}\n✨ *Asistencia:* ${attendanceText}\n👥 *Número de personas:* ${guestCountValue}`;
+            const pasesInfo = maxAllowedGuests < 10 ? ` (de ${maxAllowedGuests} asignados)` : '';
+            const message = `¡Hola! Confirmo asistencia para los XV años de Ilse:\n\n👤 *Nombre:* ${name}\n✨ *Asistencia:* ${attendanceText}\n👥 *Número de personas:* ${guestCountValue}${pasesInfo}`;
             
             const whatsappUrl = `https://api.whatsapp.com/send?phone=526641941434&text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
