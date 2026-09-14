@@ -341,7 +341,7 @@
             <!-- Formulario Confirmación de Asistencia por Pasos -->
             <div class="absolute bottom-[18%] sm:bottom-[20%] left-1/2 transform -translate-x-1/2 w-[90%] max-w-xs rounded-2xl p-5 text-white z-20">
                 <!-- Banner de Pases Reservados (Ubicado justo arriba de la confirmación) -->
-                <div id="passesNotice" class="hidden text-center text-xs sm:text-sm text-amber-300 font-bold drop-shadow-md tracking-wide mb-3 bg-black/60 py-2 px-3 rounded-xl border border-amber-300/50 backdrop-blur-sm"></div>
+                <div id="passesNotice" class="text-center text-xs sm:text-sm text-amber-300 font-bold drop-shadow-md tracking-wide mb-3 bg-black/60 py-2.5 px-3 rounded-xl border border-amber-300/50 backdrop-blur-sm"></div>
 
                 <div class="text-center mb-3">
                     <!-- Indicador de Pasos -->
@@ -579,7 +579,7 @@
         let currentStep = 1;
         let isAttending = true;
         let guestCountValue = 1;
-        let maxAllowedGuests = 10;
+        let maxAllowedGuests = 1;
 
         function checkUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -592,12 +592,20 @@
 
             if (pasesParam && !isNaN(pasesParam)) {
                 maxAllowedGuests = Math.max(1, parseInt(pasesParam, 10));
-                guestCountValue = Math.min(guestCountValue, maxAllowedGuests);
-                const notice = document.getElementById('passesNotice');
-                if (notice) {
-                    notice.innerHTML = `✨ Tienes <span class="text-white font-extrabold">${maxAllowedGuests} pase(s)</span> reservado(s)`;
-                    notice.classList.remove('hidden');
+            } else {
+                maxAllowedGuests = 1; // 1 pase por defecto para el link principal
+            }
+
+            guestCountValue = Math.min(guestCountValue, maxAllowedGuests);
+            const notice = document.getElementById('passesNotice');
+            if (notice) {
+                const pasesText = maxAllowedGuests === 1 ? '1 pase asignado' : `${maxAllowedGuests} pases asignados`;
+                if (nombreParam) {
+                    notice.innerHTML = `¡Hola <span class="text-white font-extrabold">${nombreParam}</span>! Tenemos <span class="text-amber-200 font-extrabold">${pasesText}</span>`;
+                } else {
+                    notice.innerHTML = `¡Hola! Tenemos <span class="text-amber-200 font-extrabold">${pasesText}</span>`;
                 }
+                notice.classList.remove('hidden');
             }
             updateGuestButtons();
         }
