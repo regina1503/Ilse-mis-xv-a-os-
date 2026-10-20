@@ -570,7 +570,7 @@
             if (!audio || !audio.duration) return;
             const percentage = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${percentage}%`;
-            
+
             const mins = Math.floor(audio.currentTime / 60);
             const secs = Math.floor(audio.currentTime % 60);
             audioTime.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
